@@ -1,16 +1,19 @@
 let Cart = require("../src/Cart.js");
 let Product = require("../src/Product.js");
+const InMemoryStorage = require('../src/InMemoryStorage');
 
 
 test("TestBuy, achat d'un article", () => {
-    const cart = new Cart();
+    const storage = new InMemoryStorage();
+    const cart = new Cart(storage);
     const product = new Product('Product1', 10.0);
     cart.buy(product, 3);
     expect(cart.total()).toBe(30.0);
 });
 
 test('testReset, reset le panier ', () => {
-    const cart = new Cart();
+    const storage = new InMemoryStorage();
+    const cart = new Cart(storage);
     const product = new Product('Product1', 10.0);
     cart.buy(product, 3);
     cart.reset();
@@ -18,7 +21,8 @@ test('testReset, reset le panier ', () => {
 });
 
 test('testRestore, supprime un produit', () => {
-    const cart = new Cart();
+    const storage = new InMemoryStorage();
+    const cart = new Cart(storage);
     const product1 = new Product('Product1', 10.0);
     const product2 = new Product('Product2', 15.0);
     cart.buy(product1, 3);
@@ -28,7 +32,8 @@ test('testRestore, supprime un produit', () => {
 });
 
 test('testTotal, calcul le total de plusieurs produit', () => {
-    const cart = new Cart();
+    const storage = new InMemoryStorage();
+    const cart = new Cart(storage);
     const product1 = new Product('Product1', 10.0);
     const product2 = new Product('Product2', 15.0);
     cart.buy(product1, 2);
