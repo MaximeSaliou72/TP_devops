@@ -4,13 +4,16 @@ let Product = require("../src/Product.js");
 
 test('setValue, sauvegarde dans le storage', () => {
   const storage = new InMemoryStorage();
+  //On sauvegarde la valeur 42 avec la clé 'key'
   storage.setValue('key', 42);
+  // On vérifie qu'on nous renvoie la valeur sauvegardée (42)
   expect(storage.total()).toBe(42);
 });
 
 test('reset, reset le storage', () => {
   const storage = new InMemoryStorage();
   storage.setValue('key', 42);
+  // On réinitialise le storage
   storage.reset();
   expect(storage.total()).toBe(0);
 });
@@ -21,6 +24,7 @@ test('restore, supprime un produit de la liste', () => {
     const product2 = new Product('Product2', 15.0);
     cart.buy(product1, 3);
     cart.buy(product2, 2);
+    // On supprime le produit de notre panier
     cart.restore(product2);
     expect(cart.total()).toBe(30.0);
 });
