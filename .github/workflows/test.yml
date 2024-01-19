@@ -19,3 +19,18 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm test
+
+  build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-docker@v2
+
+      - name: Build Docker Image
+        run:
+          docker build -t your-docker-image-name .
